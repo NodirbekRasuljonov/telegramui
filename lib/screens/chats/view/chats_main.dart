@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:telegramui/core/components/textstyle_comp.dart';
 import 'package:telegramui/core/constants/color_const.dart';
 import 'package:telegramui/core/constants/size_const.dart';
@@ -12,6 +13,7 @@ import 'package:telegramui/screens/chats/cubit/chats_cubit.dart';
 import 'package:telegramui/screens/chats/state/chats_state.dart';
 import 'package:telegramui/widgets/my_appbar.dart';
 import 'package:on_click/on_click.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatsView extends StatelessWidget {
   const ChatsView({Key? key}) : super(key: key);
@@ -199,6 +201,7 @@ class ChatsView extends StatelessWidget {
                       selectedTileColor: Colors.transparent,
                       onLongPress: () {
                         debugPrint("Long");
+                        modalsheet(context);
                       },
                       onTap: () {
                         Navigator.pushNamed(context, '/pchat');
@@ -249,6 +252,98 @@ class ChatsView extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+
+  Future<dynamic> modalsheet(BuildContext context) {
+    return showMaterialModalBottomSheet(
+      backgroundColor: Color(0xff858E96).withOpacity(0.5),
+      enableDrag: true,
+      context: context,
+      builder: (context) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 11.0),
+              child: Container(
+                height: context.h * 0.503,
+                width: context.h * 0.47,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  children: [
+                    AppBar(
+                      actions: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: CircleAvatar(backgroundImage: CachedNetworkImageProvider('https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'),),
+                        )
+                      ],
+                      centerTitle: true,
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Nodirbek Rasuljonov',
+                            style: MyTextStleComp.style(
+                                size: SizeConst.medium, context: context),
+                                
+                          ),
+                          Text('last seen just now',style: TextStyle(
+                            color: ColorConst.greycolor,
+                            fontSize: SizeConst.medium
+                          ))
+                        ],
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(10.0),
+                          topRight: Radius.circular(10.0),
+                        ),
+                      ),
+                      leading: Container(),
+                      backgroundColor: Colors.white,
+                    ),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10.0),
+                              bottomRight: Radius.circular(10.0)),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: context.watch<MainCubit>().isDark
+                                ? const AssetImage('assets/images/pmbgdark.png')
+                                : const AssetImage(
+                                    'assets/images/pmbglight.png'),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 11.0,
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 11.0),
+              child: Container(
+                height: context.h * 0.176,
+                width: context.h * 0.250,
+                decoration: BoxDecoration(
+                  color: Colors.blue,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+            )
+          ],
+        );
+      },
     );
   }
 }

@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
                 ? theme.darkTheme
                 : theme.lightTheme,
             onGenerateRoute: appRoutes.onGenerateRoute,
-            initialRoute: '/auth',
+            initialRoute: '/main',
             debugShowCheckedModeBanner: false,
           );
         } else {

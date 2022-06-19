@@ -41,6 +41,8 @@ dependencies:
   flutter_svg: ^1.1.0
   flutter_svg_provider: ^1.0.3
   cached_network_image: ^3.2.1
+  bottom_sheet: ^3.1.1
+  modal_bottom_sheet: ^2.0.1
 
 dev_dependencies:
   flutter_test:
