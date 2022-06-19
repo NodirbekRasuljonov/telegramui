@@ -11,11 +11,11 @@ class MyAppBarTextStyle{
 
 class MyTextStleComp{
 
-  static TextStyle style({required double size}){
+  static TextStyle style({required double size,FontWeight? weight}){
     return TextStyle(
     color: ColorConst.lighttext,
     fontSize: size,
-    
+    fontWeight: weight,
   );
   }
 }

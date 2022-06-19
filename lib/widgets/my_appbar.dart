@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:on_click/on_click.dart';
 import 'package:telegramui/core/constants/color_const.dart';
+import 'package:on_click/on_click.dart';
 
 class MyAppBar {
   static PreferredSizeWidget myAppBar({
@@ -11,13 +12,14 @@ class MyAppBar {
     Widget? title,
   }) {
     return AppBar(
+      
       elevation: 0.0,
       backgroundColor: ColorConst.transparent,
       centerTitle: true,
       title: title ?? Container(),
       leadingWidth: 100.0,
       leading: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+        padding: EdgeInsets.symmetric(horizontal: 15.0, vertical: 15.0),
         child: leadingwidget.onClick(() {
           leadingfunc();
         }),
