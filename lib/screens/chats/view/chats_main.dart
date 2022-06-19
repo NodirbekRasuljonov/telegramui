@@ -24,19 +24,23 @@ class ChatsView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: MyAppBar.myAppBar(
+            context: context,
             title: Text(
               'Chats',
               style: MyTextStleComp.style(
+                context: context,
                 weight: FontWeight.w600,
                 size: SizeConst.medium,
               ),
             ),
             leadingwidget: Text(
               "Edit",
-              style: MyAppBarTextStyle.style,
+              style: MyAppBarTextStyle.textStyle(context: context),
             ),
             leadingfunc: () {},
-            actionwidget: SvgPicture.asset('assets/svg/editlight.svg'),
+            actionwidget: context.watch<MainCubit>().isDark
+                ? SvgPicture.asset('assets/svg/editdark.svg')
+                : SvgPicture.asset('assets/svg/editlight.svg'),
             actionfunc: () {},
           ),
           body: body(context),
@@ -77,7 +81,6 @@ class ChatsView extends StatelessWidget {
             child: ListView.builder(
               itemBuilder: (context, index) {
                 return Slidable(
-                  
                   startActionPane: ActionPane(
                     motion: ScrollMotion(),
                     children: [
@@ -85,9 +88,7 @@ class ChatsView extends StatelessWidget {
                         height: context.h * 0.076,
                         width: context.h * 0.082,
                         color: Colors.white,
-                        
                       ),
-
                       Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
@@ -99,14 +100,14 @@ class ChatsView extends StatelessWidget {
                             Text(
                               'Unread',
                               style: TextStyle(
-                                  color: ColorConst.darktext,),
+                                color: ColorConst.darktext,
+                              ),
                             ),
                           ],
                         ),
                       ).onClick(() {
                         debugPrint('Unread');
-                       }),
-                      
+                      }),
                       Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
@@ -118,14 +119,14 @@ class ChatsView extends StatelessWidget {
                             Text(
                               'Pin',
                               style: TextStyle(
-                                  color: ColorConst.darktext,),
+                                color: ColorConst.darktext,
+                              ),
                             ),
                           ],
                         ),
                       ).onClick(() {
                         debugPrint('Pin');
-                       }),
-                      
+                      }),
                     ],
                   ),
                   endActionPane: ActionPane(
@@ -142,14 +143,15 @@ class ChatsView extends StatelessWidget {
                             Text(
                               'Mute',
                               style: TextStyle(
-                                  color: ColorConst.darktext,),
+                                color: ColorConst.darktext,
+                              ),
                             ),
                           ],
                         ),
                       ).onClick(() {
                         debugPrint('Mute');
-                       }),
-                       Container(
+                      }),
+                      Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
                         color: Color(0xffFE3B30),
@@ -160,14 +162,15 @@ class ChatsView extends StatelessWidget {
                             Text(
                               'Delete',
                               style: TextStyle(
-                                  color: ColorConst.darktext,),
+                                color: ColorConst.darktext,
+                              ),
                             ),
                           ],
                         ),
                       ).onClick(() {
                         debugPrint('Delete');
-                       }),
-                       Container(
+                      }),
+                      Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
                         color: Color(0xffBBBBC3),
@@ -178,13 +181,14 @@ class ChatsView extends StatelessWidget {
                             Text(
                               'Archive',
                               style: TextStyle(
-                                  color: ColorConst.darktext,),
+                                color: ColorConst.darktext,
+                              ),
                             ),
                           ],
                         ),
                       ).onClick(() {
                         debugPrint('Archive');
-                       }),
+                      }),
                     ],
                   ),
                   child: Container(
@@ -193,10 +197,10 @@ class ChatsView extends StatelessWidget {
                     child: ListTile(
                       tileColor: Colors.transparent,
                       selectedTileColor: Colors.transparent,
-                      onLongPress: (){
+                      onLongPress: () {
                         debugPrint("Long");
                       },
-                      onTap: (){
+                      onTap: () {
                         Navigator.pushNamed(context, '/pchat');
                       },
                       leading: CircleAvatar(

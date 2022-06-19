@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:telegramui/core/constants/color_const.dart';
 import 'package:telegramui/core/extension/size_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:telegramui/main/cubit/main_cubit.dart';
 import 'package:telegramui/screens/calls/view/calls_view.dart';
 import 'package:telegramui/screens/chats/view/chats_main.dart';
 import 'package:telegramui/screens/home/cubit/main_home_cubit.dart';
@@ -47,7 +48,10 @@ class MainHomePage extends StatelessWidget {
             ),
             bars(
               label: 'Calls',
-              icon: [
+              icon: context.watch<MainCubit>().isDark?[
+                'assets/svg/callnotsel.svg',
+                'assets/svg/callseldark.svg',
+              ]:[
                 'assets/svg/callnotsel.svg',
                 'assets/svg/callsel.svg',
               ],
@@ -56,7 +60,10 @@ class MainHomePage extends StatelessWidget {
             ),
             bars(
               label: 'Chats',
-              icon: [
+              icon: context.watch<MainCubit>().isDark?[
+                'assets/svg/chatsnotsel.svg',
+                'assets/svg/chatseldark.svg',
+              ]:[
                 'assets/svg/chatsnotsel.svg',
                 'assets/svg/chatssel.svg',
               ],
@@ -86,7 +93,7 @@ class MainHomePage extends StatelessWidget {
               label,
               style: TextStyle(
                 color: context.watch<MainHomeCubit>().currentindex == index
-                    ? ColorConst.kPrimaryColor
+                    ? context.watch<MainCubit>().isDark?ColorConst.darktext:ColorConst.kPrimaryColor
                     : ColorConst.greycolor,
                 fontSize: 12,
               ),

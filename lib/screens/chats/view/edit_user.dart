@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:on_click/extensions/click_extension.dart';
 import 'package:telegramui/core/components/textstyle_comp.dart';
 import 'package:telegramui/core/constants/color_const.dart';
 import 'package:telegramui/core/extension/size_extension.dart';
@@ -14,13 +15,14 @@ class EditUserPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar.myAppBar(
+        context: context,
         title: Text(
           'Info',
-          style: MyTextStleComp.style(size: 17.0),
+          style: MyTextStleComp.style(size: 17.0, context: context),
         ),
         leadingwidget: Text(
           'Cancel',
-          style: MyAppBarTextStyle.style,
+          style: MyAppBarTextStyle.textStyle(context: context),
         ),
         leadingfunc: () {
           Navigator.pushReplacementNamed(context, '/userinfo');
@@ -29,7 +31,7 @@ class EditUserPage extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(
             'Done',
-            style: MyAppBarTextStyle.style,
+            style: MyAppBarTextStyle.textStyle(context: context),
           ),
         ),
         actionfunc: () {
@@ -45,7 +47,7 @@ class EditUserPage extends StatelessWidget {
               height: context.h * 0.12,
               width: context.h * 0.5,
               // color: Colors.red,
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Row(
                 children: [
                   Container(
@@ -73,9 +75,7 @@ class EditUserPage extends StatelessWidget {
                         height: context.h * 0.05,
                         width: context.h * 0.33,
                         child: TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Nodirbek'
-                          ),
+                          initialValue: 'Nodirbek',
                         ),
                       ),
                       Container(
@@ -83,11 +83,7 @@ class EditUserPage extends StatelessWidget {
                         height: context.h * 0.05,
                         width: context.h * 0.33,
                         child: TextFormField(
-                          decoration: InputDecoration(
-                            hintText: 'Rasuljonov'
-                          ),
-                          initialValue: 'Nodirbek',
-
+                          initialValue: 'Rasuljonov',
                         ),
                       ),
                     ],
@@ -95,81 +91,105 @@ class EditUserPage extends StatelessWidget {
                 ],
               ),
             ),
-            mainPhone(context),
-            homePhone(context),
-            bio(context),
-            notifications(context),
-            delete(),
-          ],
-        ),
-      ),
-    );
-  }
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: mainPhone(context)),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: homePhone(context),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: bio(context),
+          ),
 
-  ListTile delete() {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: ColorConst.borderColor,
-        ),
-      ),
-      title: const Text(
-        'Delete Contact',
-        style: TextStyle(
-          color: Colors.red,
-        ),
-      ),
-    );
-  }
-
-  ListTile notifications(BuildContext context) {
-    return ListTile(
-      shape: RoundedRectangleBorder(
-        side: BorderSide(
-          color: ColorConst.borderColor,
-        ),
-      ),
-      title: Text(
-        'Notifications',
-        style: MyTextStleComp.style(
-          size: 17.0,
-        ),
-      ),
-      trailing: SizedBox(
-        width: context.h * 0.15,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              'Enabled',
-              style: TextStyle(color: ColorConst.greycolor, fontSize: 17.0),
+            Container(
+            alignment: Alignment.centerLeft,
+            height: context.h * 0.06,
+            width: context.h * 0.46,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: ColorConst.borderColor,
+                ),
+              ),
             ),
-            Icon(
-              Icons.chevron_right_outlined,
-              color: ColorConst.greycolor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Notifications',
+                    style: MyTextStleComp.style(size: 17.0,context: context)),
+                Row(
+                  children: [
+                    Text(
+                      'Enabled',
+                      style: TextStyle(color: ColorConst.greycolor),
+                    ),
+                    Icon(
+                      Icons.chevron_right_outlined,
+                      color: ColorConst.greycolor,
+                    )
+                  ],
+                )
+              ],
             )
+          ).onClick(
+              () {
+                debugPrint("Noitifications");
+              },
+            ),
+          Container(
+            alignment: Alignment.centerLeft,
+            height: context.h * 0.06,
+            width: context.h * 0.46,
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: ColorConst.borderColor,
+                ),
+              ),
+            ),
+            child: 
+                Text('Delete Contact',
+                    style: TextStyle(color: Colors.red,fontSize: 17.0)),
+                
+            ).onClick(
+              () {
+                debugPrint("Delete contact");
+              },
+            ),
+          
           ],
         ),
       ),
     );
   }
+
+  
+  
+
 
   Container bio(BuildContext context) {
     return Container(
       height: context.h * 0.07,
       width: context.h * 0.5,
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: ColorConst.borderColor),
+        ),
+      ),
+      // padding: const EdgeInsets.symmetric(horizontal: 20.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
             'bio',
-            style: MyTextStleComp.style(size: 14.0),
+            style: MyTextStleComp.style(size: 14.0,context: context),
           ),
           Text(
             'Design adds value faster, than it adds cost',
-            style: MyTextStleComp.style(size: 17.0),
+            style: MyTextStleComp.style(size: 17.0,context: context),
           )
         ],
       ),
@@ -180,7 +200,7 @@ class EditUserPage extends StatelessWidget {
     return Container(
       height: context.h * 0.07,
       width: context.h * 0.5,
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      // padding: const EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: ColorConst.borderColor),
@@ -192,12 +212,11 @@ class EditUserPage extends StatelessWidget {
         children: [
           Text(
             'home',
-            style: MyTextStleComp.style(size: 14.0),
+            style: MyTextStleComp.style(size: 14.0,context: context),
           ),
           Text(
             '+998931425672',
-            style: MyAppBarTextStyle.style,
-          )
+ style:MyAppBarTextStyle.textStyle(context: context),          )
         ],
       ),
     );
@@ -207,7 +226,7 @@ class EditUserPage extends StatelessWidget {
     return Container(
       height: context.h * 0.07,
       width: context.h * 0.5,
-      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      // padding: const EdgeInsets.symmetric(horizontal: 20.0),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: ColorConst.borderColor),
@@ -219,14 +238,15 @@ class EditUserPage extends StatelessWidget {
         children: [
           Text(
             'main',
-            style: MyTextStleComp.style(size: 14.0),
+            style: MyTextStleComp.style(size: 14.0,context: context),
           ),
-          Text(
+          const Text(
             '+998931234567',
-            style: MyAppBarTextStyle.style,
+            style: TextStyle(color: Colors.green),
           )
         ],
       ),
     );
   }
+
 }

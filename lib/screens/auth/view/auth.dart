@@ -16,17 +16,16 @@ class AuthPage extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: MyAppBar.myAppBar(
+            context: context,
             leadingwidget: Text(
               "Cancel",
-              style: MyAppBarTextStyle.style,
-            ),
+ style:MyAppBarTextStyle.textStyle(context: context),            ),
             leadingfunc: () {
               Navigator.pop(context);
             },
             actionwidget: Text(
               'Next',
-              style: MyAppBarTextStyle.style,
-            ),
+ style:MyAppBarTextStyle.textStyle(context: context),            ),
             actionfunc: () {
               context.read<AuthCubit>().phonecheck(context: context);
             },
@@ -52,7 +51,7 @@ class AuthPage extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(
                 'Your Phone',
-                style: MyTextStleComp.style(size: 30.0),
+                style: MyTextStleComp.style(size: 30.0,context: context),
               ),
             ),
           ),
@@ -66,6 +65,7 @@ class AuthPage extends StatelessWidget {
                 'Please confirm your country code and enter your phone number.',
                 style: MyTextStleComp.style(
                   size: SizeConst.medium,
+                  context: context
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -93,6 +93,7 @@ class AuthPage extends StatelessWidget {
                   '+998',
                   style: MyTextStleComp.style(
                     size: 20.0,
+                    context: context
                   ),
                 ),
               ),
@@ -132,6 +133,7 @@ class AuthPage extends StatelessWidget {
                 'Sync contacts',
                 style: MyTextStleComp.style(
                   size: SizeConst.medium,
+                  context: context
                 ),
               ),
               value: context.watch<AuthCubit>().sync,

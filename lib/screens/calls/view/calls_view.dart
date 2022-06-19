@@ -13,6 +13,7 @@ class CallsView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: MyAppBar.myAppBar(
+            context: context,
             leadingwidget: Container(),
             leadingfunc: () {},
             actionwidget: Icon(Icons.add),

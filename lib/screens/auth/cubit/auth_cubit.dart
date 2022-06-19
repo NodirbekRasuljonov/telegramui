@@ -24,6 +24,6 @@ class AuthCubit extends Cubit<AuthState>{
 
 
   void phonecheck({required BuildContext context}){
-    Navigator.pushNamedAndRemoveUntil(context, '/chats',(route) => false,);
+    Navigator.pushNamedAndRemoveUntil(context, '/main',(route) => false,);
   }
 }

@@ -1,19 +1,25 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:telegramui/core/constants/color_const.dart';
 import 'package:telegramui/core/constants/size_const.dart';
+import 'package:telegramui/main/cubit/main_cubit.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyAppBarTextStyle{
-  static TextStyle style=TextStyle(
+    static TextStyle textStyle({required BuildContext context}){
+    return TextStyle(
     fontSize: SizeConst.medium,
-    color: ColorConst.kPrimaryColor
+    color: context.watch<MainCubit>().isDark?ColorConst.darktext:ColorConst.kPrimaryColor
+    
   );
+  }
 }
 
 class MyTextStleComp{
 
-  static TextStyle style({required double size,FontWeight? weight}){
+  static TextStyle style({required double size,FontWeight? weight,required BuildContext context}){
     return TextStyle(
-    color: ColorConst.lighttext,
+    color: context.watch<MainCubit>().isDark?ColorConst.darktext:ColorConst.lighttext,
     fontSize: size,
     fontWeight: weight,
   );
