@@ -84,7 +84,7 @@ class ChatsView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Slidable(
                   startActionPane: ActionPane(
-                    motion: ScrollMotion(),
+                    motion: const ScrollMotion(),
                     children: [
                       Container(
                         height: context.h * 0.076,
@@ -94,7 +94,7 @@ class ChatsView extends StatelessWidget {
                       Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
-                        color: Color(0xff007EE5),
+                        color: const Color(0xff007EE5),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -113,7 +113,7 @@ class ChatsView extends StatelessWidget {
                       Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
-                        color: Color(0xff00C900),
+                        color: const Color(0xff00C900),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -132,12 +132,12 @@ class ChatsView extends StatelessWidget {
                     ],
                   ),
                   endActionPane: ActionPane(
-                    motion: ScrollMotion(),
+                    motion: const ScrollMotion(),
                     children: [
                       Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
-                        color: Color(0xffF09A37),
+                        color: const Color(0xffF09A37),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -156,7 +156,7 @@ class ChatsView extends StatelessWidget {
                       Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
-                        color: Color(0xffFE3B30),
+                        color: const Color(0xffFE3B30),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -175,7 +175,7 @@ class ChatsView extends StatelessWidget {
                       Container(
                         height: context.h * 0.076,
                         width: context.h * 0.082,
-                        color: Color(0xffBBBBC3),
+                        color: const Color(0xffBBBBC3),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -206,14 +206,14 @@ class ChatsView extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(context, '/pchat');
                       },
-                      leading: CircleAvatar(
+                      leading: const CircleAvatar(
                         backgroundImage: CachedNetworkImageProvider(
                             'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'),
                       ),
-                      title: Text(
+                      title: const Text(
                         'Nodirbek Rasuljonov',
                       ),
-                      subtitle: Text("Let's choose the option"),
+                      subtitle: const Text("Let's choose the option"),
                       trailing: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -257,7 +257,7 @@ class ChatsView extends StatelessWidget {
 
   Future<dynamic> modalsheet(BuildContext context) {
     return showMaterialModalBottomSheet(
-      backgroundColor: Color(0xff858E96).withOpacity(0.5),
+      backgroundColor: const Color(0xff858E96).withOpacity(0.5),
       enableDrag: true,
       context: context,
       builder: (context) {
@@ -266,7 +266,7 @@ class ChatsView extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 11.0),
+              padding: const EdgeInsets.symmetric(horizontal: 11.0),
               child: Container(
                 height: context.h * 0.503,
                 width: context.h * 0.47,
@@ -275,44 +275,68 @@ class ChatsView extends StatelessWidget {
                 ),
                 child: Column(
                   children: [
-                    AppBar(
-                      actions: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                          child: CircleAvatar(backgroundImage: CachedNetworkImageProvider('https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80'),),
-                        )
-                      ],
-                      centerTitle: true,
-                      title: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Nodirbek Rasuljonov',
-                            style: MyTextStleComp.style(
-                                size: SizeConst.medium, context: context),
-                                
-                          ),
-                          Text('last seen just now',style: TextStyle(
-                            color: ColorConst.greycolor,
-                            fontSize: SizeConst.medium
-                          ))
-                        ],
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
+                    Container(
+                      height: context.h * 0.05,
+                      width: context.h * 0.5,
+                      decoration: BoxDecoration(
+                        color: context.watch<MainCubit>().isDark
+                            ? const Color(0xff1C1C1D)
+                            : const Color(0xffffffff),
+                        borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(10.0),
                           topRight: Radius.circular(10.0),
                         ),
                       ),
-                      leading: Container(),
-                      backgroundColor: Colors.white,
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            top: context.h * 0.005,
+                            left: context.h * 0.12,
+                            right: context.h * 0.12,
+                            child: Text(
+                              'Nodirbek Rasuljonov',
+                              style: MyTextStleComp.style(
+                                  size: SizeConst.medium, context: context),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Positioned(
+                            top: context.h * 0.03,
+                            left: context.h * 0.12,
+                            right: context.h * 0.12,
+                            child: Text(
+                              'last seen just now',
+                              style: TextStyle(
+                                  color: ColorConst.greycolor, fontSize: 12.0),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          Positioned(
+                            top: context.h * 0.005,
+                            right: context.h * 0.015,
+                            child: Container(
+                              height: context.h * 0.045,
+                              width: context.h * 0.045,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: CachedNetworkImageProvider(
+                                    'https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     Expanded(
                       child: Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(10.0),
-                              bottomRight: Radius.circular(10.0)),
+                              bottomRight: const Radius.circular(10.0)),
                           image: DecorationImage(
                             fit: BoxFit.cover,
                             image: context.watch<MainCubit>().isDark
@@ -327,17 +351,85 @@ class ChatsView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 11.0,
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 11.0),
+              padding: const EdgeInsets.symmetric(horizontal: 11.0),
               child: Container(
-                height: context.h * 0.176,
-                width: context.h * 0.250,
+                height: context.h * 0.25,
+                width: context.h * 0.35,
                 decoration: BoxDecoration(
-                  color: Colors.blue,
+                  color: context.watch<MainCubit>().isDark
+                      ? const Color(0xff252525).withOpacity(0.8)
+                      : const Color(0xffF9F9F9).withOpacity(0.8),
                   borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: bottomactions(
+                          function: () {
+                            debugPrint("Unread");
+                          },
+                          title: 'Mark as Unread',
+                          icons: [
+                            'assets/svg/bottomsheet/unreadlight.svg',
+                            'assets/svg/bottomsheet/unreaddark.svg'
+                          ],
+                          context: context),
+                    ),
+                    Expanded(
+                      child: bottomactions(
+                          function: () {
+                            debugPrint("Pinned");
+                          },
+                          title: 'Pin',
+                          icons: [
+                            'assets/svg/bottomsheet/pinlight.svg',
+                            'assets/svg/bottomsheet/pindark.svg'
+                          ],
+                          context: context),
+                    ),
+                    Expanded(
+                      child: bottomactions(
+                          function: () {
+                            debugPrint("Muted");
+                          },
+                          title: 'Mute',
+                          icons: [
+                            'assets/svg/bottomsheet/mutelight.svg',
+                            'assets/svg/bottomsheet/mutedark.svg'
+                          ],
+                          context: context),
+                    ),
+                    Expanded(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: ColorConst.borderColor,
+                            ),
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Delete',
+                              style:
+                                  TextStyle(color: Colors.red, fontSize: 17.0),
+                            ),
+                            SvgPicture.asset(
+                                'assets/svg/bottomsheet/delete.svg'),
+                          ],
+                        ),
+                      ).onClick(() {
+                        debugPrint("Deleted");
+                       })
+                    ),
+                  ],
                 ),
               ),
             )
@@ -345,5 +437,38 @@ class ChatsView extends StatelessWidget {
         );
       },
     );
+  }
+
+  Widget bottomactions(
+      {required String title,
+      required List<String> icons,
+      required BuildContext context,
+      required Function function}) {
+    return Container(
+      height: context.h * 0.06,
+      width: context.h * 0.46,
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(
+            color: ColorConst.borderColor,
+          ),
+        ),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: MyTextStleComp.style(size: 17.0, context: context),
+          ),
+          context.watch<MainCubit>().isDark
+              ? SvgPicture.asset(icons[1])
+              : SvgPicture.asset(icons[0]),
+        ],
+      ),
+    ).onClick(() {
+      function();
+    });
   }
 }
